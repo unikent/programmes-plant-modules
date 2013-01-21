@@ -102,7 +102,15 @@ class ModuleData
 	  */ 
 	 public function get_module_data($module_code)
 	 {
-	 	$url = $this->api_target . $module_code . '.xml';
+	 	$url = '';
+	 	if ($this->api_target == '')
+	 	{
+		 	$url = \Params::$module_data_url . $module_code . '.xml';
+	 	}
+	 	else
+	 	{
+		 	$url = $this->api_target . $module_code . '.xml';
+	 	}
 	 	$response = $this->request($url);
 	 	$module = simplexml_load_string($response);
 	 	return $module;
@@ -116,7 +124,15 @@ class ModuleData
 	  */ 
 	 public function get_module_synopsis($module_code)
 	 {
-	 	$url = $this->api_target . $module_code . '.xml';
+	 	$url = '';
+	 	if ($this->api_target == '')
+	 	{
+		 	$url = \Params::$module_data_url . $module_code . '.xml';
+	 	}
+	 	else
+	 	{
+		 	$url = $this->api_target . $module_code . '.xml';
+	 	}
 	 	$response = $this->request($url);
 	 	$module = simplexml_load_string($response);
 	 	return (string) $module->synopsis;
