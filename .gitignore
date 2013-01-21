@@ -1,0 +1,6 @@
+composer.lock
+vendor/
+bin/
+config/params.php
+composer.phar
+.DS_Store

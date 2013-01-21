@@ -1,0 +1,27 @@
+{
+    "name": "unikent/programmes-plant-modules",
+    "version": "0.1",
+    "type": "library",
+    "description": "A library for interacting with the Programmes Plant REST API.",
+    "homepage": "http://github.com/unikent/programmes-plant-modules",
+    "license": "GPL-3.0+",
+    "require": {
+        "laravel/curl": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "authors": [
+        {
+            "name": "Matthew Bull",
+            "email": "m.bull@kent.ac.uk"
+        }
+    ],
+    "config": {
+        "bin-dir": "bin/"
+    },
+    "autoload": {
+        "psr-0": { "ProgrammesPlant\\": "src/" }
+    },
+    "minimum-stability": "dev"
+}
