@@ -95,11 +95,10 @@ class ModuleData
 	 /**
 	  * Get a module's data from the module cataglogue by its code, and return it as an object
 	  * 
-	  * @param string $module_code
 	  * @param string $url
 	  * @return object $module simplexml object
 	  */ 
-	 public function get_module_data($url, $module_code)
+	 public function get_module_data($url)
 	 {
 	 	$module = simplexml_load_string($response);
 	 	return $module;
@@ -108,11 +107,10 @@ class ModuleData
 	 /**
 	  * Get a module's data from the module cataglogue by its code, and return it as an object
 	  * 
-	  * @param string $module_code
 	  * @param string $url
 	  * @return string $synopsis
 	  */ 
-	 public function get_module_synopsis($url, $module_code)
+	 public function get_module_synopsis($url)
 	 {
 	 	$response = $this->request($url);
 	 	$module = simplexml_load_string($response);
@@ -122,14 +120,10 @@ class ModuleData
 	 /**
 	  * Get a module's data from the module cataglogue by its code, and return it as an object
 	  * 
-	  * @param string $pos_code
-	  * @param string $session
-	  * @param string $campus_id
-	  * @param string $institution_id
-	  * @param string $pos_version
+	  * @param string $url
 	  * @return object json object
 	  */
-	 public function get_programme_modules($url, $pos_code, $session, $campus_id='1', $institution_id='0122', $pos_version='1')
+	 public function get_programme_modules($url)
 	 {
 	 	$response = $this->request($url);
 	 	return json_decode($response);
