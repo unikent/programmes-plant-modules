@@ -2,8 +2,6 @@
 
 namespace ProgrammesPlant;
 
-require_once dirname(dirname(dirname(__FILE__))) . '/config/params.php';
-
 /**
  * ProgrammesPlant
  * 
@@ -98,20 +96,11 @@ class ModuleData
 	  * Get a module's data from the module cataglogue by its code, and return it as an object
 	  * 
 	  * @param string $module_code
+	  * @param string $url
 	  * @return object $module simplexml object
 	  */ 
-	 public function get_module_data($module_code)
+	 public function get_module_data($url, $module_code)
 	 {
-	 	$url = '';
-	 	if ($this->api_target == '')
-	 	{
-		 	$url = \Params::$module_data_url . $module_code . '.xml';
-	 	}
-	 	else
-	 	{
-		 	$url = $this->api_target . $module_code . '.xml';
-	 	}
-	 	$response = $this->request($url);
 	 	$module = simplexml_load_string($response);
 	 	return $module;
 	 }
@@ -120,19 +109,11 @@ class ModuleData
 	  * Get a module's data from the module cataglogue by its code, and return it as an object
 	  * 
 	  * @param string $module_code
+	  * @param string $url
 	  * @return string $synopsis
 	  */ 
-	 public function get_module_synopsis($module_code)
+	 public function get_module_synopsis($url, $module_code)
 	 {
-	 	$url = '';
-	 	if ($this->api_target == '')
-	 	{
-		 	$url = \Params::$module_data_url . $module_code . '.xml';
-	 	}
-	 	else
-	 	{
-		 	$url = $this->api_target . $module_code . '.xml';
-	 	}
 	 	$response = $this->request($url);
 	 	$module = simplexml_load_string($response);
 	 	return (string) $module->synopsis;
@@ -148,18 +129,8 @@ class ModuleData
 	  * @param string $pos_version
 	  * @return object json object
 	  */
-	 public function get_programme_modules($pos_code, $session, $campus_id='1', $institution_id='0122', $pos_version='1')
+	 public function get_programme_modules($url, $pos_code, $session, $campus_id='1', $institution_id='0122', $pos_version='1')
 	 {
-	 	$url = '';
-	 	// no api_target specified so use the one specified in the config
-	 	if ($this->api_target == '')
-	 	{
-		 	$url = \Params::$programme_module_base_url . \Params::$pos_code_param . '=' . $pos_code . '&' . \Params::$version_param . '=' . $session . '&' . \Params::$instituation_param . '=' . $institution_id . '&' . \Params::$campus_param . '=' . $campus_id . '&' . \Params::$session_param . '=' . $pos_version . '&format=json';
-	 	}
-	 	else
-	 	{
-		 	$url = $this->api_target;
-	 	}
 	 	$response = $this->request($url);
 	 	return json_decode($response);
 	 }
