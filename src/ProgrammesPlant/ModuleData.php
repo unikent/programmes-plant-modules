@@ -39,6 +39,11 @@ class ModuleData
 	* test mode
 	*/
 	public $test_mode = false;
+	
+	/**
+	* login
+	*/
+	public $login = array();
 
 	/**
 	* Set a HTTP proxy for the request.
@@ -62,7 +67,7 @@ class ModuleData
 		}
 		else
 		{
-			return curl_request($uri);
+			return $this->curl_request($uri);
 		}
 		return false;
 	}
@@ -82,7 +87,12 @@ class ModuleData
 		$this->curl->option(CURLOPT_SSL_VERIFYPEER, false);
 		
 		$this->curl->http_method = 'get';
-
+		
+		if ($this->login != null)
+		{
+			$this->curl->http_login($this->login['username'], $this->login['password']);
+		}
+		
 		if ($this->proxy)
 		{
 			$this->curl->proxy($this->proxy_server, $this->proxy_port);
@@ -113,7 +123,8 @@ class ModuleData
 	 {
 	 	$response = $this->request($url);
 	 	$module = simplexml_load_string($response);
-	 	return (string) $module->synopsis;
+	 	$synopsis = isset($module->synopsis) ? (string) $module->synopsis : '';
+	 	return $synopsis;
 	 }
 	 
 	 /**
