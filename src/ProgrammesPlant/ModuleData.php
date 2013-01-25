@@ -80,19 +80,26 @@ class ModuleData
 	* @param string $url The URL to make the request to.
 	* @return string $response The response object.
 	*/
-	public function curl_request($url)
+	public function curl_request($url, $timeout=5)
 	{
 		$this->curl = new \Curl($url);
 		
-		$this->curl->option(CURLOPT_SSL_VERIFYPEER, false);
+		// don't verify ssl
+		$this->curl->ssl(false);
 		
+		// a GET web service
 		$this->curl->http_method = 'get';
 		
+		// set a timeout
+		$this->curl->option(CURLOPT_TIMEOUT, $timeout);
+		
+		// login details if required
 		if ($this->login != null)
 		{
 			$this->curl->http_login($this->login['username'], $this->login['password']);
 		}
 		
+		// proxy if required
 		if ($this->proxy)
 		{
 			$this->curl->proxy($this->proxy_server, $this->proxy_port);
