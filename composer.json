@@ -6,7 +6,7 @@
     "homepage": "http://github.com/unikent/programmes-plant-modules",
     "license": "GPL-3.0+",
     "require": {
-        "laravel/curl": "dev-master"
+        "unikent/curl": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "*"
